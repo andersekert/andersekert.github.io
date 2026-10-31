@@ -50,6 +50,7 @@ Hanken Grotesk i tre vikter: 400 brödtext, 500 etiketter, 700 rubriker och knap
 | `.e-page` | Sidans ram |
 | `.e-top`, `.e-mark` | Toppraden: `ekert / Appens namn` till vänster, till exempel Logga ut till höger |
 | `.e-list`, `.e-row` | Listor |
+| `.e-app`, `.e-icon` | Rad med liten ikon, ritad med tunna linjer |
 | `.e-section` | Avdelning med rubrik ovanför en lista |
 | `.e-field` | Etikett med inmatningsfält |
 | `.e-button` | Huvudknapp |

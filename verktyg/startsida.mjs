@@ -94,6 +94,15 @@ function page(data) {
 
   <script id="lasta-data" type="application/json">${data}</script>
   <script>
+    // Innehållet sätts med innerHTML, där skript inte körs, så klicken fångas här.
+    // Varje app öppnas i ett eget fönster. Blockeras det gäller länkens target.
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest("[data-fonster]");
+      if (!link || event.metaKey || event.ctrlKey || event.shiftKey) return;
+      event.preventDefault();
+      var size = "popup,noopener,width=" + Math.min(1280, screen.availWidth) + ",height=" + Math.min(900, screen.availHeight);
+      window.open(link.href, "_blank", size);
+    });
     (function () {
       var form = document.getElementById("lasform");
       var besked = document.getElementById("besked");
