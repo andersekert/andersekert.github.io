@@ -61,4 +61,4 @@ Hanken Grotesk i tre vikter: 400 brödtext, 500 etiketter, 700 rubriker och knap
 - **Versioner:** ändra aldrig `v1.css` så att en befintlig app kan gå sönder. Större ändringar blir `v2.css`, och varje app byter när den är redo.
 - **Lagring:** appar på `andersekert.github.io` delar `localStorage`. Varje nyckel börjar med appens namn, till exempel `fotokurs:session`. Lagra inga inloggningsuppgifter där i nya appar.
 - **Startsidan:** en ny app läggs till i listan i `index.html`. En app som inte är klar står under På gång, utan länk.
-- **Startsidan är låst:** `index.html` är krypterad med lösenord. Ändra den så här: `node verktyg/startsida.mjs oppna` (ger `startsida.html`), redigera, `node verktyg/startsida.mjs las`. Checka aldrig in `startsida.html`.
+- **Startsidan är låst:** `index.html` är krypterad med lösenord. Ändra den så här: `node verktyg/startsida.mjs oppna` (ger `startsida.html`), redigera, `node verktyg/startsida.mjs las`. Checka aldrig in `startsida.html`. På Macen hämtas lösenordet från Nyckelringen, så kommandona frågar inte efter det.

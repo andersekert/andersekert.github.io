@@ -7,21 +7,36 @@
 //   node verktyg/startsida.mjs oppna   index.html  -> startsida.html
 //   node verktyg/startsida.mjs las     startsida.html -> index.html
 //
-// Lösenordet läses från STARTSIDA_LOSEN eller frågas efter i terminalen.
+// Lösenordet läses från STARTSIDA_LOSEN, sedan från Macens Nyckelring
+// (tjänsten ekert-startsida) och frågas annars efter i terminalen.
 // startsida.html innehåller det som ska stå inuti <main class="e-page">.
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { createInterface } from "node:readline/promises";
 import { webcrypto as crypto } from "node:crypto";
+import { execFileSync } from "node:child_process";
 
 const ITERATIONS = 600000;
+const KEYCHAIN_SERVICE = "ekert-startsida";
 const SOURCE = "startsida.html";
 const TARGET = "index.html";
 const b64 = (buf) => Buffer.from(buf).toString("base64");
 const unb64 = (s) => new Uint8Array(Buffer.from(s, "base64"));
 
+function keychainPassword() {
+  try {
+    return execFileSync("security", ["find-generic-password", "-s", KEYCHAIN_SERVICE, "-w"], {
+      encoding: "utf8", stdio: ["ignore", "pipe", "ignore"],
+    }).trim();
+  } catch {
+    return "";
+  }
+}
+
 async function password() {
   if (process.env.STARTSIDA_LOSEN) return process.env.STARTSIDA_LOSEN;
+  const saved = keychainPassword();
+  if (saved) return saved;
   const rl = createInterface({ input: process.stdin, output: process.stdout });
   const p = await rl.question("Lösenord: ");
   rl.close();
@@ -102,6 +117,25 @@ function page(data) {
       event.preventDefault();
       var size = "popup,noopener,width=" + Math.min(1280, screen.availWidth) + ",height=" + Math.min(900, screen.availHeight);
       window.open(link.href, "_blank", size);
+    });
+    // Delar inbjudan med telefonens eller Macens delningsmeny. Finns den inte
+    // kopieras texten och länken.
+    document.addEventListener("click", async function (event) {
+      var button = event.target.closest("[data-share-url]");
+      if (!button) return;
+      var d = button.dataset;
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: d.shareTitle, text: d.shareText, url: d.shareUrl });
+          return;
+        }
+        await navigator.clipboard.writeText(d.shareText + "\\n\\n" + d.shareUrl);
+        button.textContent = d.shareNote;
+      } catch (err) {
+        if (err.name === "AbortError") return;
+        button.textContent = "Kunde inte dela";
+      }
+      setTimeout(function () { button.textContent = "Dela"; }, 4000);
     });
     (function () {
       var form = document.getElementById("lasform");
