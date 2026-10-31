@@ -3,56 +3,58 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
   <title>Ekert: appar</title>
-  <meta name="description" content="Anders Ekerts appar, samlade på ett ställe.">
   <link rel="stylesheet" href="profil/v1.css">
 </head>
 <body>
-  <main class="e-page">
+  <!-- Genererad av verktyg/startsida.mjs. Ändra inte för hand. -->
+  <main class="e-page" id="sida">
     <div class="e-top">
       <span class="e-mark">ekert</span>
     </div>
 
     <h1>Appar</h1>
 
-    <ul class="e-list">
-      <li>
-        <a class="e-row" href="/bakgrundsbanken/">
-          <h2>Bakgrundsbanken</h2>
-          <p>Intervjubakgrunder med plats, solkompass, väder och taggar.</p>
-        </a>
-      </li>
-      <li>
-        <a class="e-row" href="/nedladdning/Import-och-Backup.zip" download>
-          <h2>Import &amp; Backup</h2>
-          <p>Mac-app som kopierar minneskort till import och backup, kontrollerar kopiorna och mejlar när det är klart. Klicka för att ladda ner. Appen är inte signerad, så första gången tillåter du den under Systeminställningar &gt; Integritet och säkerhet. Bilddata kräver exiftool.</p>
-        </a>
-      </li>
-      <li>
-        <a class="e-row" href="/parkeringskarta/">
-          <h2>Parkeringskarta</h2>
-          <p>Parkeringsföreskrifter i Stockholm på karta, ur Trafikkontorets öppna data.</p>
-        </a>
-      </li>
-      <li>
-        <a class="e-row" href="https://anderss-macbook-pro-14.tail5b5089.ts.net/">
-          <h2>Translator</h2>
-          <p>Översätter inslag till en svensk textfil där talarna är åtskilda. Kräver Tailscale.</p>
-        </a>
-      </li>
-    </ul>
-
-    <section class="e-section">
-      <h2>På gång</h2>
-      <ul class="e-list">
-        <li>
-          <div class="e-row">
-            <h2 class="e-muted">Fotokurs 2026:27</h2>
-            <p>Avancerad fotokurs i 40 veckor. Onsdagar 20:00–21:00.</p>
-          </div>
-        </li>
-      </ul>
-    </section>
+    <form class="e-section" id="lasform" autocomplete="on">
+      <input type="text" name="username" value="startsida" autocomplete="username" hidden>
+      <div class="e-field">
+        <label for="losen">Lösenord</label>
+        <input id="losen" name="password" type="password" autocomplete="current-password" required autofocus>
+      </div>
+      <button class="e-button" type="submit">Öppna</button>
+      <p class="e-muted" id="besked" role="status" aria-live="polite"></p>
+    </form>
   </main>
+
+  <script id="lasta-data" type="application/json">{"v":1,"iter":600000,"salt":"8y5GZ8pGBDWy8TBdNLIEQQ==","iv":"r1Vje482+dckNU87","ct":"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"}</script>
+  <script>
+    (function () {
+      var form = document.getElementById("lasform");
+      var besked = document.getElementById("besked");
+      var d = JSON.parse(document.getElementById("lasta-data").textContent);
+      function unb64(s) { return Uint8Array.from(atob(s), function (c) { return c.charCodeAt(0); }); }
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        var knapp = form.querySelector("button");
+        knapp.disabled = true;
+        besked.textContent = "Öppnar …";
+        try {
+          var pw = document.getElementById("losen").value;
+          var base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveKey"]);
+          var key = await crypto.subtle.deriveKey(
+            { name: "PBKDF2", hash: "SHA-256", salt: unb64(d.salt), iterations: d.iter },
+            base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+          var plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(d.iv) }, key, unb64(d.ct));
+          document.getElementById("sida").innerHTML = new TextDecoder().decode(plain);
+        } catch (err) {
+          besked.textContent = "Fel lösenord.";
+          knapp.disabled = false;
+          document.getElementById("losen").select();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
